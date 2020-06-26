@@ -1,0 +1,6 @@
+
+resources/dataset/
+
+__pycache__/
+
+.vscode/
