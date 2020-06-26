@@ -1,0 +1,48 @@
+Without Augmentation
+epochs=100,
+        batch_size=32,
+        output_dir='mymodels/facemask',
+        code_size=128,
+        lr=2e-4
+Epoch 100/100
+80/80 [==============================] - 3s 36ms/step - loss: 0.0776 - binary_accuracy: 0.9752 - val_loss: 0.1378 - val_binary_accuracy: 0.9446
+
+0.1
+encoder_path='mymodels/facemask/encoder.h5',
+        epochs=15,
+        batch_size=64,
+        output_dir='mymodels/facemask',
+        lr=1e-3,
+        color=True
+Epoch 15/15
+4/4 [==============================] - 1s 336ms/step - loss: 0.3956 - categorical_accuracy: 0.8398 - val_loss: 0.4924 - val_categorical_accuracy: 0.7991
+
+1.0
+Epoch 15/15
+40/40 [==============================] - 6s 157ms/step - loss: 0.3368 - categorical_accuracy: 0.8629 - val_loss: 0.3681 - val_categorical_accuracy: 0.8661
+
+
+With Augmentation
+epochs=100,
+        batch_size=32,
+        output_dir='mymodels/facemask',
+        code_size=128,
+        lr=2e-4
+Epoch 100/100
+80/80 [==============================] - 3s 35ms/step - loss: 0.2665 - binary_accuracy: 0.8908 - val_loss: 0.2859 - val_binary_accuracy: 0.8786
+
+1.0
+encoder_path='mymodels/facemask/encoder.h5',
+        epochs=15,
+        batch_size=64,
+        output_dir='mymodels/facemask',
+        lr=1e-3,
+        color=True
+Epoch 14/15
+40/40 [==============================] - 7s 163ms/step - loss: 0.2860 - categorical_accuracy: 0.8887 - val_loss: 0.3127 - val_categorical_accuracy: 0.8973
+Epoch 15/15
+40/40 [==============================] - 6s 161ms/step - loss: 0.2948 - categorical_accuracy: 0.8766 - val_loss: 0.3463 - val_categorical_accuracy: 0.8527
+
+0.1
+poch 15/15
+4/4 [==============================] - 1s 313ms/step - loss: 0.3160 - categorical_accuracy: 0.8750 - val_loss: 0.4304 - val_categorical_accuracy: 0.8326

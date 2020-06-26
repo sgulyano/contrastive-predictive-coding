@@ -147,7 +147,7 @@ class FaceMaskTileGenerator(object):
         self.rescale = rescale
 
         # Initialize MNIST dataset
-        self.fackmask_handler = FaceMaskHandler(128)#136)
+        self.fackmask_handler = FaceMaskHandler(136)
         self.n_samples = self.fackmask_handler.get_n_samples(subset)
         self.n_batches = self.n_samples // batch_size
 
@@ -162,7 +162,7 @@ class FaceMaskTileGenerator(object):
 
     def next(self):
         tile_size = 32
-        ts = 32 #34
+        ts = 34
         hs = int(ts / 2)
         x, _ = self.fackmask_handler.get_batch(self.subset, self.batch_size, rescale=self.rescale)
         n = int((x.shape[1] // (tile_size / 2)) - 1)
@@ -174,13 +174,13 @@ class FaceMaskTileGenerator(object):
             for j in range(n):
                 tile = x[:, i*hs:i*hs+ts, j*hs:j*hs+ts, :]
                 blocks.append(tile)
-                # # data augmentation: random crop
-                # dx, dy = np.random.randint(3, size=2)
-                # tile = tile[:, dx:dx+tile_size, dy:dy+tile_size, :]
+                # data augmentation: random crop
+                dx, dy = np.random.randint(3, size=2)
+                tile = tile[:, dx:dx+tile_size, dy:dy+tile_size, :]
 
-                # # data augmentation: horizontal flip
-                # if np.random.randint(2) == 0:
-                #     tile = tile[:, :,::-1, :]
+                # data augmentation: horizontal flip
+                if np.random.randint(2) == 0:
+                    tile = tile[:, :,::-1, :]
 
                 arr.append(tile)
         
@@ -208,16 +208,15 @@ class FaceMaskTileGenerator(object):
             for b in idx:
                 nrri = np.random.choice(nl[k])
                 tiles.append(blocks[b, nrri, :])
-                # tile = blocks[b, nrri, :]
 
             tile = np.stack(tiles)
-            # # data augmentation: random crop
-            # dx, dy = np.random.randint(3, size=2)
-            # tile = tile[:, dx:dx+tile_size, dy:dy+tile_size, :]
+            # data augmentation: random crop
+            dx, dy = np.random.randint(3, size=2)
+            tile = tile[:, dx:dx+tile_size, dy:dy+tile_size, :]
 
-            # # data augmentation: horizontal flip
-            # if np.random.randint(2) == 0:
-            #     tile = tile[:, :,::-1, :]
+            # data augmentation: horizontal flip
+            if np.random.randint(2) == 0:
+                tile = tile[:, :,::-1, :]
 
             images[idx, n-self.predict_terms+k, :] = tile#images[b, nrri, :]
 
